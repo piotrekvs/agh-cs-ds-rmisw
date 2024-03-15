@@ -15,6 +15,9 @@ def multiply_strassen(A: List[List[int]], B: List[List[int]]) -> List[List[int]]
 def add_matrix(A: List[List[int]], B:  List[List[int]]) -> List[List[int]]:
     return [[A[y][x] + B[y][x] for x in range(len(A[0]))] for y in range(len(A))] 
 
+def subtract_matrix(A: List[List[int]], B:  List[List[int]]) -> List[List[int]]:
+    return [[A[y][x] - B[y][x] for x in range(len(A[0]))] for y in range(len(A))] 
+
 def multiply_strassen_recurrent(A: List[List[int]], B: List[List[int]]) -> List[List[int]]:
     l = len(A)
     C = [[0 for _ in range(l)] for _ in range(l)] 
@@ -33,10 +36,18 @@ def multiply_strassen_recurrent(A: List[List[int]], B: List[List[int]]) -> List[
     B10 = [[B[mid_idx + y][x] for x in range(mid_idx)] for y in range(mid_idx)] 
     B11 = [[B[y + mid_idx][x + mid_idx] for x in range(mid_idx)] for y in range(mid_idx)] 
 
-    C00 = add_matrix(multiply_strassen(A00, B00),multiply_strassen(A01, B10))
-    C01 = add_matrix(multiply_strassen(A00, B01),multiply_strassen(A01, B11))
-    C10 = add_matrix(multiply_strassen(A10, B00),multiply_strassen(A11, B10))
-    C11 = add_matrix(multiply_strassen(A10, B01),multiply_strassen(A11, B11))
+    P1 = multiply_strassen(add_matrix(A00, A11), add_matrix(B00, B11))
+    P2 = multiply_strassen(add_matrix(A10, A11), B00)
+    P3 = multiply_strassen(A00, subtract_matrix(B01, B11))
+    P4 = multiply_strassen(A11, subtract_matrix(B10, B00))
+    P5 = multiply_strassen(add_matrix(A00, A01), B11)
+    P6 = multiply_strassen(subtract_matrix(A10, A00), add_matrix(B00, B01))
+    P7 = multiply_strassen(subtract_matrix(A01, A11), add_matrix(B10, B11))
+
+    C00 = add_matrix(subtract_matrix(add_matrix(P1, P4), P5), P7)
+    C01 = add_matrix(P3, P5)
+    C10 = add_matrix(P2, P4)
+    C11 = add_matrix(add_matrix(subtract_matrix(P1, P2), P3), P6)
 
     for i in range(mid_idx): 
         for j in range(mid_idx): 

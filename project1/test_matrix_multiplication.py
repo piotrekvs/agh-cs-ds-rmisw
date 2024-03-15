@@ -1,3 +1,4 @@
+# type: ignore
 import timeit
 from typing import List
 from matrix_multiplication_basic import multiply_basic
@@ -14,7 +15,7 @@ def print_matrix(A: List[List[int]]):
 def generate_random_square_matrix(n: int, max: int = 100) -> List[List[int]]:
     return [[randint(-max, max) for _ in range(n)] for _ in range(n)] 
 
-iterations = 5
+iterations = 9
 iteration_list = list(range(0, iterations))
 
 def test():
@@ -31,7 +32,6 @@ def test():
     print(basic_times)
     print(strassen_times)
 
-    # type: ignore
     plt.plot(basic_times, color='red', label='Basic')
     plt.plot(strassen_times, color='blue', label='Strassen')
     plt.legend()
