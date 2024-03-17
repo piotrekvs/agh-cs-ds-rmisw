@@ -1,6 +1,5 @@
 from typing import List
 
-fp_operations = 0
 
 class MatrixMultiplier():
     def __init__(self) -> None:
