@@ -3,6 +3,15 @@ import random
 
 # Birth date: 04.02.2001 -> matrix size is: 2 + 4 = 6
 MATRIX_SIZE = 6
+def vector_difference_norm(vector1: List[float], vector2: List[float]) -> float:
+    """
+    Compute norm L2 of two vectors
+    """
+    if len(vector1) != len(vector2):
+        raise ValueError("Wrong lenght of vectors!")
+
+    difference = [(x1 - x2)**2 for x1, x2 in zip(vector1, vector2)]
+    return sum(difference) ** 0.5
 
 def print_matrix(A: List[List[int]]):
     if not isinstance(A[0], list):  # print vector

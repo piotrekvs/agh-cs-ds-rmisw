@@ -1,6 +1,6 @@
 from typing import List, Tuple
 import random
-from utils import generate_random_matrix, generate_random_vector, print_matrix, solve_backwards_substitution, MATRIX_SIZE
+from utils import generate_random_matrix,vector_difference_norm, generate_random_vector, print_matrix, solve_backwards_substitution, MATRIX_SIZE
 
 # pseudocode for gauss with pivoting:
 # https://users.wpi.edu/~walker/MA514/HANDOUTS/gaussian_elim.pdf
@@ -43,3 +43,13 @@ if __name__ == '__main__':
     print("Solution for AX = b")
     x = solve_backwards_substitution(A, b)
     print_matrix(x)
+    matlab_result = [2.3577717879604689,
+  1.2719676549865226,
+-12.3000898472596649,
+ -5.3349505840071885,
+  9.6442946990116845,
+ 12.2548068283917395]
+    print("matlab solution")
+    print_matrix(matlab_result)
+    print("Norm x1 - x2")
+    print(vector_difference_norm(x, matlab_result))

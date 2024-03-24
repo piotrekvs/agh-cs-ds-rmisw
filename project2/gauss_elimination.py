@@ -1,7 +1,7 @@
 from typing import List, Tuple
 import random
 
-from utils import generate_random_matrix, generate_random_vector,solve_backwards_substitution, print_matrix, MATRIX_SIZE
+from utils import generate_random_matrix, vector_difference_norm, generate_random_vector,solve_backwards_substitution, print_matrix, MATRIX_SIZE
 # Back substitution: https://www.codesansar.com/numerical-methods/gauss-elimination-method-pseudocode.htm
 # Gaus (1 on diagonal): https://pre-epodreczniki.open.agh.edu.pl/tiki-index.php?page=Gaussian+elimination+algorithm
 
@@ -39,3 +39,13 @@ if __name__ == "__main__":
     print("Solution for AX = b")
     x = solve_backwards_substitution(A, b)
     print_matrix(x)
+    matlab_result = [0.7096370955835307,
+    -0.3149404017835176,
+    0.5207141943167616,
+    -0.4468931169227438,
+    0.3228737069007946,
+    0.4392452533047234]
+    print("matlab solution")
+    print_matrix(matlab_result)
+    print("Norm x1 - x2")
+    print(vector_difference_norm(x, matlab_result))

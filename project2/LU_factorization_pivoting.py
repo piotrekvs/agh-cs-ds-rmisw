@@ -2,7 +2,7 @@ from typing import List, Tuple
 import random
 
 from utils import generate_random_matrix, generate_random_vector, print_matrix, matrix_multiply, \
-    solve_backwards_substitution, solve_forwards_substitution, MATRIX_SIZE
+    solve_backwards_substitution, vector_difference_norm, solve_forwards_substitution, MATRIX_SIZE
 # https://johnfoster.pge.utexas.edu/numerical-methods-book/LinearAlgebra_LU.html
 
 def LU_decomposition_pivoting(A: List[int]) -> Tuple[List[List[int]], List[List[int]], List[List[int]]]:
@@ -63,4 +63,16 @@ if __name__ == "__main__":
     print("P matrix:")
     print_matrix(P)
     print("Solution of AX = b")
-    print(plu_solve(A, b))
+    x =plu_solve(A, b)
+    matlab_result = [
+    0.5153350263723383,
+    0.3273425799309761,
+    -0.5919775997916261,
+    0.4518460636843133,
+   -0.1194243667382952,
+    0.4933906361919647
+    ]
+    print("Matlab result:")
+    print(matlab_result)
+    print("L2 norm x1 - x2")
+    print(vector_difference_norm(x, matlab_result))
